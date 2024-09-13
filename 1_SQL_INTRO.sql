@@ -32,6 +32,7 @@ city='Vizag' and Age = 21 ;
 /*IN ADN BETWEEN OPEAROATOR*/
 Select * from emp_details where 
 city in ('Vizag','vzm') ;
+#BETWEEN CLAUSE 
 Select * from emp_details where 
 doj between '2024-06-01' and '2024-08-01' ; 
 
@@ -65,9 +66,16 @@ select round(23.3333,2);
 select RIGHT("india", 3);
 
 /*DATE FUNCTION  */
+select now() ;
 select curdate() ; 
+select current_time() ;
+ 
 select day(curdate());
-select now() ; 
+select month(curdate()) ; 
+select year(curdate());
+select time(current_time());
+select minute(current_time()) ;
+
 
 /*CASE AND THEN */ 
 select 

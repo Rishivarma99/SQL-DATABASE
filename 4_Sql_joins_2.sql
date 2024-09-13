@@ -23,6 +23,7 @@ where c.customerNumber is not null group by employeeNumber ;
 
 select c.customerName ,c.phone , e.employeenumber , e.email from  customers as c right join employees as e on c.salesRepEmployeeNumber =  e.employeeNumber  ; 
 
+
 /*SELF JOIN */
 select * from employees  ; 
 

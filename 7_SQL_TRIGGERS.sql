@@ -23,5 +23,10 @@ insert into customers1 values
 
 select * from customers1 ; 
 
-#AFTER INSERT TRIGGER  : 
+
+
+ 
+
+
+
 

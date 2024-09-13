@@ -1,7 +1,33 @@
+use triggers  ;
+show tables; 
 
-use sql_intro  ;
-show tables ;
-CREATE TABLE employees_b (
+#AFTER insert TRIGGER 
+create table customers2 ( id int primary key auto_increment , name varchar(30) , birthdate date ) ; 
+create table message2 ( id int auto_increment , messageId int , message varchar(50) not null  , primary key (id , messageId) ) ;
+
+delimiter // 
+CREATE TRIGGER trigger2 
+after 
+insert on customers2 
+for each row 
+begin
+if ISNULL(NEW.birthdate) then 
+ insert into message2 (messageId , message) 
+ values (new.id , concat("hi" , new.name) ) ;
+end if ; 
+end ; 
+
+insert into customers2 (name , birthdate) 
+values 
+
+("raghu" , null) ;
+ 
+select * from message2 ; 
+
+
+#BEFORE UPDATE TRIGGER  
+
+CREATE TABLE employees3 (
     emp_id INT PRIMARY KEY,
     name VARCHAR(50),
     job_name VARCHAR(50),
@@ -14,7 +40,7 @@ CREATE TABLE employees_b (
     age int
 );
 
-insert into employees_b value 
+insert into employees3 value 
 (1, 'John Doe', 'Manager', NULL, '2022-01-01', 80000.00, 1000.00, 1,"hyd",52),
     (2, 'Jane Smith', 'Salesperson', 1, '2020-01-01', 50000.00, 2000.00, 1, "hyd",22),
     (3, 'Bob Johnson', 'Salesperson', 1, '2020-02-01', 55000.00, 1500.00, 1,"vzm",25),
@@ -31,27 +57,24 @@ insert into employees_b value
     (14, 'Sophia Brown', 'Salesperson', 12, '2020-03-01', 55000.00, 1500.00, 4,"hyd",45),
     (15, 'Ethan Johnson', 'Salesperson', 12, '2020-04-01', 60000.00, 1000.00, 4,"kaki",56),
     (16, 'Ava Lee', 'Salesperson', 12, '2020-05-01', 60000.00, 1000.00, 4,"vzm",22) ; 
-
-#UPDATE CLUASE 
-
-#To change the salry in the employee table whose age is greater than 31 
-
-select * from employees1 ;
-select * from employees1 where age>31 ;
-
-select * from employees_b;
-
-update employees1 
-set salary = salary * 0.35 
-where age in 
-(select age from employees_b where age > 31) ;
-
-#DELETE CLUSE 
-
-#To delete smployees with age greater than 27 
-
-delete from employees1 
-where emp_id in (select emp_id from employees_b where age>27) ;
-
-
-
+    
+    #normal update 
+    update employees3 
+    set commission = 2100 
+    where commission = 2000 ;
+    
+    delimiter // 
+    create trigger trigger4 
+    before update on employees3 
+    for each row
+    begin 
+    if old.age=52 and new.age = 100 then set new.age = 0 ; 
+    end if ; 
+    end ; //
+    
+    #here age of emp_id1 will set to 0 
+    update employees3 
+    set age = 100 where emp_id = 1 ; 
+    
+    select * from employees3 ;  
+   
