@@ -9,7 +9,7 @@ NEED TO USE SUBQUERY
 select max(salary) from employees1 ; 
 
 select dep_id from  employees1 
-where salary = (select max(salary) from employees1);
+where salary = (select max(salary) from employees1) or salary = (select min(salary) from employees1) ;
 
 /*TO GET THE MEMBERS WHO HAVE SALARY LESS THAN AVG SALARY OF ALL EMPLOYEES */
 select avg(salary) from employees1 ;

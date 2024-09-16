@@ -1,6 +1,6 @@
 /* LEFT OUTER JOIN */ 
 show databases ;
-USE classicmodels ;
+ USE classicmodels ;
 select * from customers ; 
 select * from orders ; 
 
@@ -8,9 +8,7 @@ select o.orderNumber , c.customerName , o.status  from orders as o left join cus
 select o.orderNumber , c.customerName , o.status  from  customers as c left join orders as o using (customerNumber) ;  
 
 /*CUSTOMERS WITH NO ORDERS */
-select o.orderNumber , c.customerName  from  customers as c left join orders as o using (customerNumber) 
-where o.orderNumber is  NULL
-group by c.customer ;  
+select o.orderNumber , c.customerName  from  customers as c left join orders as o using (customerNumber) where o.orderNumber is  NULL  ;  
 
 
 /*right join */
